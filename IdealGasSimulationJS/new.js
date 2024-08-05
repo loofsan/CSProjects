@@ -139,7 +139,17 @@ class Canvas {
     this.histCanvas.width = 800;
     this.histCanvas.height = 800;
 
+    this.overlayCanvas = document.getElementById("overlayCanvas");
+    this.overlayCtx = this.overlayCanvas.getContext("2d");
+
+    this.overlayCanvas.width = 800;
+    this.overlayCanvas.height = 800;
+
+    this.temperature = 2; // Initial temperature
+
+    this.setupTemperatureControl();
     this.setup();
+    this.setupButtons();
     requestAnimationFrame(() => this.update());
   }
   setup() {
@@ -155,6 +165,68 @@ class Canvas {
       );
     }
   }
+
+  setupTemperatureControl() {
+    this.temperatureSlider = document.getElementById("temperatureControl");
+    this.temperatureSlider.addEventListener("input", () => {
+      this.temperature = parseFloat(this.temperatureSlider.value);
+      this.adjustParticleVelocities();
+    });
+  }
+
+  adjustParticleVelocities() {
+    const temperatureRatio = Math.sqrt(this.temperature / 2); // Square root because KE ~ v^2
+    for (let particle of this.particles) {
+      particle.vel = Vector.mult(particle.vel, temperatureRatio);
+    }
+  }
+
+  setInitialVelocity(particle) {
+    const { speed, angle } = sampleMaxwellBoltzmann(
+      Math.sqrt(this.temperature)
+    );
+    particle.vel = new Vector(speed * Math.cos(angle), speed * Math.sin(angle));
+  }
+
+  setupButtons() {
+    const addButton = document.getElementById("addParticles");
+    addButton.addEventListener("click", () => this.addNewParticles());
+
+    const removeButton = document.getElementById("removeParticles");
+    removeButton.addEventListener("click", () => this.removeParticles());
+
+    const resetButton = document.getElementById("resetParticles");
+    resetButton.addEventListener("click", () => this.resetSimulation());
+  }
+
+  addNewParticles() {
+    const newParticles = 10; // Number of particles to add each time
+    for (let i = 0; i < newParticles; i++) {
+      this.particles.push(
+        new Particle(
+          randomNumBetween(0, this.simCanvas.width),
+          randomNumBetween(0, this.simCanvas.height)
+        )
+      );
+    }
+  }
+  removeParticles() {
+    const particlesToRemove = 10; // Number of particles to remove each time
+    if (this.particles.length > particlesToRemove) {
+      this.particles.splice(
+        this.particles.length - particlesToRemove,
+        particlesToRemove
+      );
+    } else {
+      this.particles = []; // Remove all particles if less than particlesToRemove remain
+    }
+  }
+
+  resetSimulation() {
+    this.particles = []; // Clear all particles
+    this.updateParticleCountDisplay();
+  }
+
   update() {
     this.simCtx.clearRect(0, 0, this.simCanvas.width, this.simCanvas.height);
     this.histCtx.clearRect(0, 0, this.histCanvas.width, this.histCanvas.height);
@@ -188,65 +260,136 @@ class Canvas {
     }
 
     this.plotHistogram(speeds);
+    this.updateParticleCountDisplay();
+    this.plotTheoreticalCurve();
     requestAnimationFrame(() => this.update());
   }
-plotHistogram(speeds) {
-  const numBins = 20; // Increased number of histogram bars
-  const maxSpeed = 10; // Upper limit of velocity for the x-axis
-  const minSpeed = 0; // Lower limit of velocity for the x-axis
-  const binWidth = (maxSpeed - minSpeed) / numBins;
-
-  const bins = new Array(numBins).fill(0);
-
-  speeds.forEach(speed => {
-    const bin = Math.floor((speed - minSpeed) / binWidth);
-    bins[Math.min(bin, bins.length - 1)]++;
-  });
-
-  const totalParticles = speeds.length;
-  const normalizedBins = bins.map(count => count / (totalParticles * binWidth));
-
-  const maxBinDensity = Math.max(...normalizedBins);
-  const histHeight = this.histCanvas.height;
-  const histWidth = this.histCanvas.width;
-  const barWidth = histWidth / numBins;
-
-  // Draw axes
-  this.histCtx.beginPath();
-  this.histCtx.moveTo(50, 10);
-  this.histCtx.lineTo(50, histHeight - 50);
-  this.histCtx.lineTo(histWidth - 10, histHeight - 50);
-  this.histCtx.stroke();
-
-  // Draw x-axis labels
-  this.histCtx.fillStyle = 'white';
-  this.histCtx.textAlign = 'center';
-  for (let i = 0; i <= numBins; i++) {
-    const x = 50 + i * barWidth;
-    const speed = minSpeed + i * binWidth;
-    this.histCtx.fillText(speed.toFixed(1), x, histHeight - 30);
+  updateParticleCountDisplay() {
+    const particleCount = this.particles.length;
+    document.getElementById(
+      "particleCount"
+    ).textContent = `Particles: ${particleCount}`;
   }
 
-  // Draw y-axis labels
-  this.histCtx.textAlign = 'right';
-  for (let i = 0; i <= 5; i++) {
-    const y = histHeight - 50 - (i / 5) * (histHeight - 60);
-    const density = (i / 5) * maxBinDensity;
-    this.histCtx.fillText(density.toFixed(2), 40, y);
-  }
+  plotHistogram(speeds) {
+    const numBins = 20; // Increased number of histogram bars
+    const maxSpeed = 10; // Upper limit of velocity for the x-axis
+    const minSpeed = 0; // Lower limit of velocity for the x-axis
+    const binWidth = (maxSpeed - minSpeed) / numBins;
 
-  // Draw histogram bars
-  this.histCtx.fillStyle = 'white';
-  normalizedBins.forEach((density, index) => {
-    const barHeight = (density / maxBinDensity) * (histHeight - 60);
-    this.histCtx.fillRect(
-      50 + index * barWidth,
-      histHeight - 50 - barHeight,
-      barWidth,
-      barHeight
+    const bins = new Array(numBins).fill(0);
+
+    speeds.forEach((speed) => {
+      const bin = Math.floor((speed - minSpeed) / binWidth);
+      bins[Math.min(bin, bins.length - 1)]++;
+    });
+
+    const totalParticles = speeds.length;
+    const normalizedBins = bins.map(
+      (count) => count / (totalParticles * binWidth)
     );
-  });
-}
+
+    const maxBinDensity = Math.max(...normalizedBins);
+    const histHeight = this.histCanvas.height;
+    const histWidth = this.histCanvas.width;
+    const barWidth = histWidth / numBins;
+
+    // Draw axes
+    this.histCtx.beginPath();
+    this.histCtx.moveTo(50, 10);
+    this.histCtx.lineTo(50, histHeight - 50);
+    this.histCtx.lineTo(histWidth - 10, histHeight - 50);
+    this.histCtx.stroke();
+
+    // Draw x-axis labels
+    this.histCtx.fillStyle = "white";
+    this.histCtx.textAlign = "center";
+    for (let i = 0; i <= numBins; i++) {
+      const x = 50 + i * barWidth;
+      const speed = minSpeed + i * binWidth;
+      this.histCtx.fillText(speed.toFixed(1), x, histHeight - 30);
+    }
+
+    // Draw y-axis labels
+    this.histCtx.textAlign = "right";
+    for (let i = 0; i <= 5; i++) {
+      const y = histHeight - 50 - (i / 5) * (histHeight - 60);
+      const density = (i / 5) * maxBinDensity;
+      this.histCtx.fillText(density.toFixed(2), 40, y);
+    }
+
+    // Draw histogram bars
+    this.histCtx.fillStyle = "white";
+    normalizedBins.forEach((density, index) => {
+      const barHeight = (density / maxBinDensity) * (histHeight - 60);
+      this.histCtx.fillRect(
+        50 + index * barWidth,
+        histHeight - 50 - barHeight,
+        barWidth,
+        barHeight
+      );
+    });
+    this.plotTheoreticalCurve();
+  }
+
+  plotTheoreticalCurve() {
+    const numPoints = 100;
+    const maxSpeed = 10;
+    const minSpeed = 0;
+    const T = this.temperature;
+
+    const kB = 1; // Boltzmann constant (set to 1 for simplification)
+    const m = 1; // Mass of particle (set to 1 for simplification)
+
+    this.overlayCtx.clearRect(
+      0,
+      0,
+      this.overlayCanvas.width,
+      this.overlayCanvas.height
+    );
+    this.overlayCtx.strokeStyle = "yellow";
+    this.overlayCtx.lineWidth = 2;
+    this.overlayCtx.beginPath();
+
+    let maxF = 0;
+
+    // First pass to find the maximum value of the distribution
+    for (let i = 0; i <= numPoints; i++) {
+      const v = minSpeed + (i / numPoints) * (maxSpeed - minSpeed);
+      const f =
+        4 *
+        Math.PI *
+        Math.pow(v, 2) *
+        Math.pow(m / (2 * Math.PI * kB * T), 1.5) *
+        Math.exp((-m * v * v) / (2 * kB * T));
+      if (f > maxF) maxF = f;
+    }
+
+    // Second pass to draw the curve
+    for (let i = 0; i <= numPoints; i++) {
+      const v = minSpeed + (i / numPoints) * (maxSpeed - minSpeed);
+      const f =
+        4 *
+        Math.PI *
+        Math.pow(v, 2) *
+        Math.pow(m / (2 * Math.PI * kB * T), 1.5) *
+        Math.exp((-m * v * v) / (2 * kB * T));
+
+      const x = 50 + (i / numPoints) * (this.overlayCanvas.width - 60);
+      const y =
+        this.overlayCanvas.height -
+        50 -
+        (f / maxF) * (this.overlayCanvas.height - 60);
+
+      if (i === 0) {
+        this.overlayCtx.moveTo(x, y);
+      } else {
+        this.overlayCtx.lineTo(x, y);
+      }
+    }
+
+    this.overlayCtx.stroke();
+  }
 }
 
 new Canvas();
