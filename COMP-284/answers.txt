@@ -1,0 +1,4 @@
+Mangoes, 3, 12
+Apples, 4, 10
+Oranges, 5, 100
+Tables, 3, 10
