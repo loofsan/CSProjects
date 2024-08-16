@@ -62,8 +62,6 @@ Generates the best class for each course in skyline, cañada, csm suited to the 
 ### [**Doubly Linked List**](/DoublyLinkedList-main) 
 Built a doubly linked list from scratch in C++ and Java
 
-### [**Ideal Gas Simulation**](/IdealGasSimulation) 
-Built a demonstration of how particles behave in ideal gas modeled under the Maxwell-Boltzmann Distribution both in Javascript and Python
 <!--
 ### [**AP Exam Policy Extension**](https://chromewebstore.google.com/detail/uc-ap-exam-policy-checker/lhmkeccgiphdegpelmommddcdlnpoaee?hl=en-US&utm_source=ext_sidebar)
 Created a chrome extension to easily check AP exam policies from the UC website
