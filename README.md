@@ -65,7 +65,6 @@ Built a doubly linked list from scratch in C++ and Java
 ### [**Vocis**](/Vocis) 
 Built a voice-empathetic recognition software aimed for vocal coaching for CalHacks v11.0 using Hume.AI mainly. 
 
-<!--
 ### [**AP Exam Policy Extension**](https://chromewebstore.google.com/detail/uc-ap-exam-policy-checker/lhmkeccgiphdegpelmommddcdlnpoaee?hl=en-US&utm_source=ext_sidebar)
 Created a chrome extension to easily check AP exam policies from the UC website
 
@@ -75,6 +74,7 @@ Created a website for Barbering, Cosmetology, Esthetics program at Skyline Colle
 ### [**Demonstration Of Photo-Electric Effect Using PhotoDiodes & LEDs**](https://sites.google.com/my.smccd.edu/group11projectportfolio/home)
 Used LEDs to observe whether the efficiency of electricity transferred has a direct and proportional relationship with the wavelength of the light that falls on the object
 
+<!--
 ### [**AWS Certified CLoud Practitioner**](https://www.credly.com/badges/162db95a-cc67-416f-855d-a27b10d3b19e)
 Certification of AWS Cloud Practitioner
 -->
