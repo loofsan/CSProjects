@@ -16,21 +16,22 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Tech Stack - How Vocis is built
+- ReactJs 
+- Shadcn 
+- NextJs 
+- TailwindCSS 
+- Hume.Ai 
+- OpenAI
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Learn More
+## Challenges We Faced
+During our hackathon, one of the key challenges we faced was the need to dive into extensive documentation while working on API implementation as we had never worked with Hume before. Not only that, as all of us don’t have much experience with the backend of an app, it was really taxing to learn and implement at the same time. This task, which is already time-consuming, became more difficult due to unstable internet connectivity. This led to unexpected delays in accessing resources and troubleshooting problems in real time, which put additional pressure on our timeline. Despite these setbacks, our team worked hard to adapt and maintain momentum.
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Accomplishments
+Despite the challenges we faced, we were able to make a functional prototype at the very least that displays the core of our program which is simulating real-life difficult scenarios for presenters and public-speakers. At least, the very bare bones and we’re very proud of ourselves for being able to do that and create a wonderful project.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## What We Learned
+We learned to create a viable project in limited time allowing us to overcome our shortcomings in our ability to create a project Through multiple workshops and gaining insightful help from mentors, we learned more about APIs, implementing APIs, and making sure they cooperate with each other and streamlining the process. We also learned a lot of new, cool and amazing technologies created by a lot of amazing people that allowed us to achieve the aim of our project
