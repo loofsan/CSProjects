@@ -29,8 +29,8 @@ Here's a list of the languages and technologies I've worked with and are include
   ### - Java <img src="http://img.shields.io/badge/-Java-F89820?style=flat&logo=java&logoColor=white">  
   ### - C++ <img src="https://img.shields.io/badge/-C++-blue?style=flat&logo=cplusplus&logoColor=white">
   ### - Python <img src="https://img.shields.io/badge/-Python-lightblue?style=flat&logo=python&logoColor=black"> 
-  ### - Javascript <img src="https://img.shields.io/badge/-Javascript-1a1919?style=flat&logo=javascript&logoColor=c9bb1c">, HTML, CSS <img src="https://img.shields.io/badge/-HTML5-db5807?style=flat&logo=html5&logoColor=adacac"> <img src="https://img.shields.io/badge/-CSS-bdbdbd?style=flat&logo=css3&logoColor=086382">
-  ### - Julia <img src="https://img.shields.io/badge/-Julia-1a1919?style=flat&logo=julia&logoColor=red">
+  ### - Javascript <img src="https://img.shields.io/badge/-Javascript-1a1919?style=flat&logo=javascript&logoColor=c9bb1c">, HTML <img src="https://img.shields.io/badge/-HTML5-db5807?style=flat&logo=html5&logoColor=adacac">, CSS <img src="https://img.shields.io/badge/-CSS-bdbdbd?style=flat&logo=css3&logoColor=086382">
+
 
   
   
