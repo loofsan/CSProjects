@@ -74,6 +74,8 @@ Created a website for Barbering, Cosmetology, Esthetics program at Skyline Colle
 ### [**Demonstration Of Photo-Electric Effect Using PhotoDiodes & LEDs**](https://sites.google.com/my.smccd.edu/group11projectportfolio/home)
 Used LEDs to observe whether the efficiency of electricity transferred has a direct and proportional relationship with the wavelength of the light that falls on the object
 
+### [**Exploring Solutions to the Schrödinger Equation in a Finite Potential Box**](/SchrodingerEquation)
+This project explores solutions to the three-dimensional time-independent Schrödinger equation for a particle confined in a finite potential box. The goal is to visualize quantized energy levels using heatmaps and 3-dimensional models. By focusing on the hydrogen atom, we aim to enhance our understanding of the interplay between quantum mechanics and physical phenomena.
 <!--
 ### [**AWS Certified CLoud Practitioner**](https://www.credly.com/badges/162db95a-cc67-416f-855d-a27b10d3b19e)
 Certification of AWS Cloud Practitioner
