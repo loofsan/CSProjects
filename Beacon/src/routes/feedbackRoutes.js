@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const Feedback = require("../models/Feedback");
 
-// Get all feedback (could be admin-only in production)
 router.get("/", async (req, res) => {
   try {
     const feedback = await Feedback.find().populate("resource_id", "name");
@@ -12,7 +11,6 @@ router.get("/", async (req, res) => {
   }
 });
 
-// Get feedback for a specific resource
 router.get("/resource/:resourceId", async (req, res) => {
   try {
     const feedback = await Feedback.find({
@@ -24,7 +22,6 @@ router.get("/resource/:resourceId", async (req, res) => {
   }
 });
 
-// Get aggregate feedback stats for a resource
 router.get("/stats/resource/:resourceId", async (req, res) => {
   try {
     const stats = await Feedback.aggregate([
@@ -49,9 +46,7 @@ router.get("/stats/resource/:resourceId", async (req, res) => {
   }
 });
 
-// Submit new feedback
 router.post("/", async (req, res) => {
-  // Generate a session ID if not provided
   if (!req.body.session_id) {
     req.body.session_id = Math.random().toString(36).substring(2, 15);
   }

@@ -23,7 +23,7 @@ const searchLogSchema = new mongoose.Schema(
         default: "Point",
       },
       coordinates: {
-        type: [Number], // [longitude, latitude]
+        type: [Number],
         default: [0, 0],
       },
     },
@@ -31,7 +31,6 @@ const searchLogSchema = new mongoose.Schema(
       type: String,
       index: true,
     },
-    // No personal identifying information stored
     device_type: {
       type: String,
       enum: ["mobile", "tablet", "desktop", "unknown"],

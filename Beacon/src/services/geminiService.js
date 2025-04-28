@@ -5,13 +5,12 @@ const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 
 /**
- * Analyze user query with Gemini AI to extract search parameters
- * @param {string} query - The user's natural language query
- * @returns {Object} - Extracted search parameters
+ * @param {string} query
+ * @returns {Object}
  */
+
 async function analyzeQuery(query) {
   try {
-    // Get all categories and their keywords from the database
     const categories = await Category.find();
     const categoryData = categories.map((cat) => ({
       name: cat.name,
@@ -20,7 +19,6 @@ async function analyzeQuery(query) {
       keywords: cat.keywords,
     }));
 
-    // Create a prompt for Gemini
     const prompt = `
       You are an AI assistant for a community resource navigator. Your task is to analyze a user's natural language query and extract key information to help them find appropriate resources. The user is looking for community resources in San Francisco.
 
@@ -48,12 +46,10 @@ async function analyzeQuery(query) {
       }
     `;
 
-    // Get response from Gemini
     const result = await model.generateContent(prompt);
     const response = result.response;
     const text = response.text();
 
-    // Extract JSON from response (handling potential formatting issues)
     let jsonMatch = text.match(/\{[\s\S]*\}/);
     if (!jsonMatch) {
       throw new Error("Failed to parse Gemini response as JSON");
@@ -63,20 +59,18 @@ async function analyzeQuery(query) {
     return parsedResult;
   } catch (error) {
     console.error("Error analyzing query with Gemini:", error);
-    // Fallback to basic keyword matching if Gemini fails
     return fallbackQueryAnalysis(query);
   }
 }
 
 /**
- * Generate a personalized response explaining the search results
- * @param {Array} resources - The resources found
- * @param {Object} queryAnalysis - The analysis of the original query
- * @returns {string} - A personalized explanation of the results
+
+ * @param {Array} resources 
+ * @param {Object} queryAnalysis 
+ * @returns {string} 
  */
 async function generateResultsExplanation(resources, queryAnalysis) {
   try {
-    // Create a simplified version of resources for the prompt
     const simplifiedResources = resources.map((r) => ({
       name: r.name,
       category: r.category,
@@ -103,26 +97,22 @@ async function generateResultsExplanation(resources, queryAnalysis) {
       Keep your response concise (3-5 sentences) and focus on being helpful rather than technical.
     `;
 
-    // Get response from Gemini
     const result = await model.generateContent(prompt);
     const response = result.response;
     return response.text();
   } catch (error) {
     console.error("Error generating results explanation:", error);
-    // Fallback message if Gemini fails
     return `We found ${resources.length} resources that might help with your needs. Please review the list and contact any that seem like a good fit for your situation.`;
   }
 }
 
 /**
- * Fallback method for basic query analysis when Gemini is unavailable
- * @param {string} query - The user's query
- * @returns {Object} - Basic search parameters
+ * @param {string} query
+ * @returns {Object}
  */
 function fallbackQueryAnalysis(query) {
   const queryLower = query.toLowerCase();
 
-  // Simple keyword matching for categories
   const categoryMatches = [];
   if (
     queryLower.includes("food") ||
@@ -156,7 +146,6 @@ function fallbackQueryAnalysis(query) {
     categoryMatches.push("employment");
   }
 
-  // Extract potential location from query
   const sfNeighborhoods = [
     "mission",
     "tenderloin",

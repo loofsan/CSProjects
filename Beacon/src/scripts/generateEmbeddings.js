@@ -2,7 +2,6 @@ require("dotenv").config();
 const mongoose = require("mongoose");
 const { updateAllResourceEmbeddings } = require("../services/embeddingService");
 
-// Connect to MongoDB
 mongoose
   .connect(process.env.MONGODB_URI)
   .then(() => console.log("Connected to MongoDB Atlas"))
@@ -11,7 +10,6 @@ mongoose
     process.exit(1);
   });
 
-// Generate embeddings for all resources
 async function generateAllEmbeddings() {
   try {
     console.log("Starting embedding generation...");

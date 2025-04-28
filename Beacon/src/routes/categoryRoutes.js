@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const Category = require("../models/Category");
 
-// Get all categories
 router.get("/", async (req, res) => {
   try {
     const categories = await Category.find();
@@ -12,7 +11,6 @@ router.get("/", async (req, res) => {
   }
 });
 
-// Get a specific category
 router.get("/:id", async (req, res) => {
   try {
     const category = await Category.findById(req.params.id);
@@ -25,7 +23,6 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-// Get category by name
 router.get("/name/:name", async (req, res) => {
   try {
     const category = await Category.findOne({ name: req.params.name });
@@ -38,7 +35,6 @@ router.get("/name/:name", async (req, res) => {
   }
 });
 
-// Create a new category (could be admin-only in production)
 router.post("/", async (req, res) => {
   const category = new Category(req.body);
   try {
@@ -49,7 +45,6 @@ router.post("/", async (req, res) => {
   }
 });
 
-// Update a category (could be admin-only in production)
 router.patch("/:id", async (req, res) => {
   try {
     const updatedCategory = await Category.findByIdAndUpdate(
@@ -63,7 +58,6 @@ router.patch("/:id", async (req, res) => {
   }
 });
 
-// Delete a category (could be admin-only in production)
 router.delete("/:id", async (req, res) => {
   try {
     await Category.findByIdAndDelete(req.params.id);

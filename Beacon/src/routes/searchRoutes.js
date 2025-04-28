@@ -7,7 +7,6 @@ const {
   generateResultsExplanation,
 } = require("../services/geminiService");
 
-// Testing endpoint to verify database connection
 router.get("/test", async (req, res) => {
   try {
     const count = await Resource.countDocuments();
@@ -26,7 +25,6 @@ router.get("/keyword/:keyword", async (req, res) => {
   try {
     const keyword = req.params.keyword;
 
-    // Search for the keyword in multiple fields
     const resources = await Resource.find({
       $or: [
         { name: { $regex: keyword, $options: "i" } },
@@ -48,7 +46,6 @@ router.get("/keyword/:keyword", async (req, res) => {
   }
 });
 
-// Natural language search endpoint
 router.post("/", async (req, res) => {
   try {
     const { query, location, sessionId } = req.body;
@@ -58,37 +55,31 @@ router.post("/", async (req, res) => {
       return res.status(400).json({ message: "Search query is required" });
     }
 
-    // Try to analyze with Gemini, but don't halt execution if it fails
     let queryAnalysis = null;
     try {
       queryAnalysis = await analyzeQuery(query);
       console.log("Query analysis result:", queryAnalysis);
     } catch (error) {
       console.error("Error analyzing query with Gemini:", error);
-      // Continue with basic search
     }
 
-    // Extract keywords from the query
     const keywords = query
       .toLowerCase()
       .split(/\s+/)
-      .filter((word) => word.length > 3) // Filter out short words
+      .filter((word) => word.length > 3)
       .filter(
         (word) =>
           !["help", "need", "find", "looking", "where", "what"].includes(word)
-      ); // Filter common words
+      );
 
-    // Build search criteria
     let searchCriteria = {};
 
-    // If we have Gemini analysis, use it
     if (queryAnalysis) {
       const orConditions = [];
 
-      // Add category search if available
       if (queryAnalysis.categories && queryAnalysis.categories.length > 0) {
         orConditions.push({ category: { $in: queryAnalysis.categories } });
-        // Also search by type that might map to these categories
+
         const categoryTypes = {
           food: ["food bank", "meal", "pantry", "nutrition"],
           housing: ["shelter", "housing", "homeless"],
@@ -105,7 +96,6 @@ router.post("/", async (req, res) => {
         });
       }
 
-      // Add keyword search
       if (queryAnalysis.keywords && queryAnalysis.keywords.length > 0) {
         queryAnalysis.keywords.forEach((keyword) => {
           orConditions.push({ name: { $regex: keyword, $options: "i" } });
@@ -120,10 +110,8 @@ router.post("/", async (req, res) => {
         searchCriteria.$or = orConditions;
       }
     } else {
-      // Fallback
       const orConditions = [];
 
-      // Match keywords to categories
       const categoryKeywords = {
         food: ["food", "hungry", "meal", "eat", "nutrition"],
         housing: ["shelter", "housing", "homeless", "stay", "sleep"],
@@ -162,7 +150,6 @@ router.post("/", async (req, res) => {
     const resources = await Resource.find(searchCriteria);
     console.log(`Found ${resources.length} matching resources`);
 
-    // Generate explanation (simplified if Gemini fails)
     let explanation = "";
     try {
       if (queryAnalysis) {
@@ -182,7 +169,6 @@ router.post("/", async (req, res) => {
       explanation = `Here are ${resources.length} resources that might help with your needs.`;
     }
 
-    // Log search
     try {
       const searchLog = new SearchLog({
         query: query,
@@ -200,7 +186,6 @@ router.post("/", async (req, res) => {
       console.error("Error saving search log:", error);
     }
 
-    // Return search results
     res.json({
       resources,
       explanation,
@@ -214,7 +199,6 @@ router.post("/", async (req, res) => {
   }
 });
 
-// Helper function to create a description of resource types
 function getResourceTypeDescription(resources) {
   const types = new Set();
 

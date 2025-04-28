@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const hourSchema = new mongoose.Schema({
-  day: { type: Number, required: true }, // Days as numbers
+  day: { type: Number, required: true },
   open: { type: String, default: "" },
   close: { type: String, default: "" },
 });
@@ -30,7 +30,7 @@ const resourceSchema = new mongoose.Schema(
     description: {
       type: String,
     },
-    // GeoJSON format for location
+
     location: {
       type: {
         type: String,
@@ -42,7 +42,7 @@ const resourceSchema = new mongoose.Schema(
         required: true,
       },
     },
-    // Separate address field
+
     address: {
       type: String,
     },
@@ -51,11 +51,11 @@ const resourceSchema = new mongoose.Schema(
       email: { type: String },
       website: { type: String },
     },
-    // Support direct contactPhone field
+
     contactPhone: { type: String },
-    // Hours of operation
+
     hours: [hourSchema],
-    // Support various additional fields
+
     requirements: [{ type: String }],
     eligibility: { type: String },
     documentation_required: [{ type: String }],
@@ -68,23 +68,22 @@ const resourceSchema = new mongoose.Schema(
     capacity: { type: String },
     lastUpdated: { type: Date, default: Date.now },
     website: { type: String },
-    // Fields for user submissions
+
     verificationStatus: {
       type: String,
       enum: ["pending", "verified", "rejected"],
       default: "pending",
     },
     submittedAt: { type: Date },
-    submittedBy: { type: String }, // Could store email or session ID
+    submittedBy: { type: String },
   },
   {
     timestamps: true,
-    // Allow fields that aren't defined in the schema
+
     strict: false,
   }
 );
 
-// Create text index for natural language search
 resourceSchema.index({
   name: "text",
   description: "text",
@@ -93,12 +92,9 @@ resourceSchema.index({
   services: "text",
 });
 
-// Create 2dsphere index for geospatial queries
 resourceSchema.index({ location: "2dsphere" });
 
-// Helper method to get category from type if needed
 resourceSchema.virtual("categoryFromType").get(function () {
-  // Map resource types to categories
   const typeToCategory = {
     shelter: "housing",
     "food bank": "food",
@@ -112,7 +108,7 @@ resourceSchema.virtual("categoryFromType").get(function () {
 resourceSchema.add({
   embedding: {
     type: [Number],
-    index: false, // We'll use vector search rather than indexing directly
+    index: false,
     default: null,
   },
 });
@@ -121,8 +117,8 @@ resourceSchema.index(
   { embedding: "vectorSearch" },
   {
     vectorSearchOptions: {
-      dimension: 768, // Dimension of the embedding vectors
-      similarity: "cosine", // Similarity metric
+      dimension: 768,
+      similarity: "cosine",
     },
   }
 );

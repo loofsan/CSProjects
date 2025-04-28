@@ -21,7 +21,6 @@ const feedbackSchema = new mongoose.Schema(
       type: String,
       maxlength: 500,
     },
-    // No personal identifying information stored
     session_id: {
       type: String,
       index: true,

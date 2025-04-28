@@ -393,14 +393,12 @@ footer a:hover {
   }
 }
 
-/* Required Fields */
 .required-notice {
   color: var(--error);
   font-size: 0.875rem;
   margin-bottom: 1rem;
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
   header .flex {
     flex-direction: column;

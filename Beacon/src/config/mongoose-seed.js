@@ -5,7 +5,6 @@ const Category = require("../models/Category");
 const SearchLog = require("../models/SearchLog");
 const Feedback = require("../models/Feedback");
 
-// Connect to MongoDB
 mongoose
   .connect(process.env.MONGODB_URI)
   .then(() => console.log("Connected to MongoDB Atlas"))

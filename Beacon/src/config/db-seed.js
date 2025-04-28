@@ -11,13 +11,11 @@ async function seedDatabase() {
 
     const database = client.db("community_resources");
 
-    // Create collections
     await database.createCollection("resources");
     await database.createCollection("categories");
     await database.createCollection("searchLogs");
     await database.createCollection("feedback");
 
-    // Insert sample categories
     const categoriesCollection = database.collection("categories");
     await categoriesCollection.insertMany([
       {
@@ -99,7 +97,6 @@ async function seedDatabase() {
       },
     ]);
 
-    // Insert sample resources
     const resourcesCollection = database.collection("resources");
     await resourcesCollection.insertMany([
       {

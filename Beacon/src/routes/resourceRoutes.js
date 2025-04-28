@@ -3,7 +3,6 @@ const router = express.Router();
 const Resource = require("../models/Resource");
 const { findSimilarResources } = require("../services/embeddingService");
 
-// Get all resources
 router.get("/", async (req, res) => {
   try {
     const resources = await Resource.find();
@@ -13,7 +12,6 @@ router.get("/", async (req, res) => {
   }
 });
 
-// Get a specific resource
 router.get("/:id", async (req, res) => {
   try {
     const resource = await Resource.findById(req.params.id);
@@ -26,7 +24,6 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-// Get resources by category
 router.get("/category/:category", async (req, res) => {
   try {
     const resources = await Resource.find({ category: req.params.category });
@@ -36,7 +33,6 @@ router.get("/category/:category", async (req, res) => {
   }
 });
 
-// Get resources by subcategory
 router.get("/subcategory/:subcategory", async (req, res) => {
   try {
     const resources = await Resource.find({
@@ -48,14 +44,13 @@ router.get("/subcategory/:subcategory", async (req, res) => {
   }
 });
 
-// Get nearby resources
 router.get("/nearby/:longitude/:latitude/:maxDistance?", async (req, res) => {
   try {
     const longitude = parseFloat(req.params.longitude);
     const latitude = parseFloat(req.params.latitude);
     const maxDistance = req.params.maxDistance
       ? parseInt(req.params.maxDistance)
-      : 5000; // Default 5km
+      : 5000;
 
     if (isNaN(longitude) || isNaN(latitude)) {
       return res.status(400).json({ message: "Invalid coordinates" });
@@ -79,7 +74,6 @@ router.get("/nearby/:longitude/:latitude/:maxDistance?", async (req, res) => {
   }
 });
 
-// Get similar resources endpoint
 router.get("/:id/similar", async (req, res) => {
   try {
     const resourceId = req.params.id;
@@ -94,23 +88,18 @@ router.get("/:id/similar", async (req, res) => {
   }
 });
 
-// Create a new resource from user submission
 router.post("/", async (req, res) => {
   try {
-    // Basic validation
     if (!req.body.name || !req.body.address) {
       return res.status(400).json({ message: "Name and address are required" });
     }
 
-    // Format the data to match our schema
     const resourceData = {
       ...req.body,
-      // Ensure location is properly formatted
       location: req.body.location || {
         type: "Point",
-        coordinates: [0, 0], // Default coordinates if none provided
+        coordinates: [0, 0],
       },
-      // Add verification status for moderation
       verificationStatus: "pending",
       submittedAt: new Date(),
     };
@@ -118,7 +107,6 @@ router.post("/", async (req, res) => {
     const resource = new Resource(resourceData);
     const newResource = await resource.save();
 
-    // Log the submission
     console.log(
       `New resource submitted: ${newResource.name} (ID: ${newResource._id})`
     );
@@ -139,7 +127,6 @@ router.post("/", async (req, res) => {
     });
   }
 });
-// Update a resource (could be admin-only in production)
 router.patch("/:id", async (req, res) => {
   try {
     const updatedResource = await Resource.findByIdAndUpdate(
@@ -153,7 +140,6 @@ router.patch("/:id", async (req, res) => {
   }
 });
 
-// Delete a resource (could be admin-only in production)
 router.delete("/:id", async (req, res) => {
   try {
     await Resource.findByIdAndDelete(req.params.id);
