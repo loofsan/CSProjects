@@ -56,9 +56,6 @@ This is a *Intro to Data Structures: Java* course I took.
 
 ## **Projects**
 
-### [**Class Generator**](/ClassGenerator-master) 
-Generates the best class for each course in skyline, cañada, csm suited to the student
-
 ### [**Doubly Linked List**](/DoublyLinkedList-main) 
 Built a doubly linked list from scratch in C++ and Java
 
