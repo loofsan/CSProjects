@@ -56,8 +56,13 @@ This is a *Intro to Data Structures: Java* course I took.
 
 ## **Projects**
 
+<!--
 ### [**Doubly Linked List**](/DoublyLinkedList-main) 
 Built a doubly linked list from scratch in C++ and Java
+-->
+
+### [**Resource Overflow**](/Resource Overflow)
+This is the project created for SFHacks 2025 - Tech For Good. The Resource Overflow was inspired from challenges that underserved populations face when trying to access critical services. Many people in need don't know where to find help and what kind of help exists. Additionally, existing resource directories are often difficult to navigate. I wanted to create a solution that uses technology to connect people with the resources they need in a simple way that prioritizes accessibility and utility.
 
 ### [**Vocis**](/Vocis) 
 Built a voice-empathetic recognition software aimed for vocal coaching for CalHacks v11.0 using Hume.AI mainly. 
