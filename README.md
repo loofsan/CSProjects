@@ -45,6 +45,9 @@ These are all the classworks I've done at my local community college. There are 
 This is a *Introductory Python Programming* course I took. 
 Inside the folder, there is another folder, [***Python***](/CIS-117/Python), which consists of all the Python coding assignments and projects that I've done over the years over online courses and such.
 
+### [**CIS-250**](/CIS-250) 
+This is a *Intro to C++* course I took. 
+
 ### [**COMP-252**](/COMP-252) 
 This is a *Intro to Data Structures: C++* course I took. 
 
