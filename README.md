@@ -39,44 +39,55 @@ Here's a list of the languages and technologies I've worked with and are include
 
 ## **Classwork**
 
-These are all the classworks I've done at my local community college. There are 4 classes I've uploaded on this repository.
+These are course projects from my time at Skyline College. A collection of programming coursework across Python, C++, Java, and data systems.
 
-### [**CIS-117**](/Skyline-College-Classes/CIS-117)
+<details>
+<summary><strong>Python Courses</strong></summary>
 
-This is a _Introductory Python Programming_ course I took.
-Inside the folder, there is another folder, [**_Python_**](/Skyline-College-Classes/CIS-117/Python), which consists of all the Python coding assignments and projects that I've done over the years over online courses and such.
+- [CIS-117](./Skyline-College-Classes/CIS-117)  
+  Introductory Python Programming  
+  → Includes additional work in [Python folder](./Skyline-College-Classes/CIS-117/Python)
 
-### [**CIS-502**](/Skyline-College-Classes/CIS-502)
+- [CIS-502](./Skyline-College-Classes/CIS-502)  
+  Applied Python Programming
 
-This is a _Applied Python Programming_ course I took.
+</details>
 
-### [**CIS-254**](/Skyline-College-Classes/CIS-254)
+<details>
+<summary><strong>C++ Courses</strong></summary>
 
-This is a _Intro to C++_ course I took.
+- [CIS-254](./Skyline-College-Classes/CIS-254)  
+  Intro to C++
 
-### [**CIS-250**](/Skyline-College-Classes/CIS-250)
+- [COMP-252](./Skyline-College-Classes/COMP-252)  
+  Data Structures (C++)
 
-This is a _Intro to Object Oriented Programming_ course I took.
+</details>
 
-### [**COMP-252**](/Skyline-College-Classes/COMP-252)
+<details>
+<summary><strong>Java Courses</strong></summary>
 
-This is a _Intro to Data Structures: C++_ course I took.
+- [COMP-284](./Skyline-College-Classes/COMP-284)  
+  Object-Oriented Programming (Java)
 
-### [**COMP-284**](/Skyline-College-Classes/COMP-284)
+- [COMP-286](./Skyline-College-Classes/COMP-286)  
+  Data Structures (Java)
 
-This is a _Intro to Object-Oriented Programming: Java_ course I took.
+</details>
 
-### [**COMP-286**](/Skyline-College-Classes/COMP-286)
+<details>
+<summary><strong>Other Courses</strong></summary>
 
-This is a _Intro to Data Structures: Java_ course I took.
+- [CIS-250](./Skyline-College-Classes/CIS-250)  
+  Object-Oriented Programming
 
-### [**CIS-140**](/Skyline-College-Classes/CIS-140)
+- [CIS-140](./Skyline-College-Classes/CIS-140)  
+  Big Data Analytics
 
-This is a _Big Data Analytics_ course I took.
+- [CIS-129](./Skyline-College-Classes/CIS-129)  
+  Server-Side JavaScript
 
-### [**CIS-129**](/Skyline-College-Classes/CIS-129)
-
-This is a _Frameworks/Serv-Side JavaScript_ course I took.
+</details>
 
 ## **Projects**
 
