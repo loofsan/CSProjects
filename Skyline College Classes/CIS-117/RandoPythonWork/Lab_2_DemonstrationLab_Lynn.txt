@@ -1,0 +1,21 @@
+Lynn T. Aung
+June 14 2023
+Lab 2 - Demonstration Lab
+
+1. Line 1 creates a class named “CalculateArea”.
+
+2. “main” in Line 3 is a method that is part of the class, “CalculateArea”.
+
+3. The braces, “{” and “}”, are to end the method and the class. 
+
+4. Yes, it would not print out anything because the print line doesn’t have brackets.
+   "System.out.print ("A rectangle has a length of " + rectangleLength" has no brackets at the end.
+
+6. “int” means integer in Line 5 and Line 6.
+
+7. In Line 8, there are quotation marks around things we want to use as Strings so that it prints out exactly the way we wanted to. 
+   Some of them don’t have quotation marks because we want to use the value of the variable.
+
+8. The “+” in Line 8 combines or concatenates the strings and variables together in a sentence.
+
+9. Line 9 closes the method.

@@ -1,0 +1,16 @@
+.movie-list {
+    list-style: none;
+    padding: 1rem;
+}
+
+.movie-list-empty {
+    color: #666;
+    font-style: italic;
+    padding: 2rem;
+    border: 2px dashed var(--border-color);
+    border-radius: 8px;
+}
+
+.icon {
+    margin-right: 0.5rem;
+}

@@ -1,0 +1,16 @@
+.display {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 10px 40px 30px;
+  text-align: center;
+}
+
+.display > div {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: black;
+}
+
+.error {
+  color: #dc3545;
+}

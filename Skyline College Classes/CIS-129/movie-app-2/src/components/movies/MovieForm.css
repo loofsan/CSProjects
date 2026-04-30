@@ -1,0 +1,64 @@
+.movie-form {
+  padding: 20px;
+  background-color: #dce8f0;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.movie-form h2 {
+  margin: 0 0 16px 0;
+  font-size: 1.6em;
+  font-weight: bold;
+  color: #000;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 14px;
+}
+
+.form-group label {
+  margin-bottom: 4px;
+  font-size: 0.95em;
+  color: #000;
+}
+
+.form-group input {
+  padding: 8px 10px;
+  border: 1px solid #797979;
+  border-radius: 6px;
+  font-size: 1em;
+  background-color: white;
+  outline: none;
+  color: black;
+}
+
+.form-group input:focus {
+  border-color: #888;
+}
+
+.form-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.btn {
+  padding: 8px 20px;
+  font-size: 0.95em;
+  border-radius: 6px;
+  border: 2px solid black;
+  cursor: pointer;
+  background-color: rgb(228, 228, 228);
+  color: black;
+}
+
+.btn:hover {
+  background-color: #f0f0f0;
+}
+
+.delete-confirm p {
+  margin-bottom: 14px;
+  font-size: 0.95em;
+}

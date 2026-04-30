@@ -1,0 +1,32 @@
+form {
+  padding: 30px 40px;
+}
+
+form > div {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  text-align: left;
+}
+
+input[type="number"] {
+  width: 100%;
+  padding: 15px;
+  font-size: 1.1rem;
+  border: 1px solid black;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+button[type="submit"] {
+  width: 100%;
+  padding: 15px;
+  font-size: 1.1rem;
+  color: white;
+  background-color: darkblue;
+  border: none;
+  border-radius: 8px;
+  margin-top: 10px;
+}

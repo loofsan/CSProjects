@@ -1,0 +1,13 @@
+.header {
+  width: 100vw;
+  margin-left: 0;
+  background-color: #87cffa;
+  padding: 20px 0px 20px 0px;
+  text-align: center;
+  color: black;
+}
+
+p {
+  font-size: 19px;
+  padding: 15px;
+}

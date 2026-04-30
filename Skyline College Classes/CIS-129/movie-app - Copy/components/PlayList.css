@@ -1,0 +1,28 @@
+.play-list {
+  width: 100%;
+}
+
+.play-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px 0;
+  width: 100%;
+}
+
+.play-list li {
+  color: black;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #d3d3d3;
+  padding: 40px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 1.5em;
+  cursor: pointer;
+}
+
+.play-list button {
+  display: none;
+  margin-left: 15px;
+}
